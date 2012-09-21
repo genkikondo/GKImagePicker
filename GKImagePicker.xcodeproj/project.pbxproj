@@ -1,0 +1,313 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A52281716098A830019A654 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A52281616098A830019A654 /* UIKit.framework */; };
+		0A52281916098A830019A654 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A52281816098A830019A654 /* Foundation.framework */; };
+		0A52281B16098A830019A654 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A52281A16098A830019A654 /* CoreGraphics.framework */; };
+		0A52282116098A830019A654 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A52281F16098A830019A654 /* InfoPlist.strings */; };
+		0A52282316098A830019A654 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52282216098A830019A654 /* main.m */; };
+		0A52282716098A830019A654 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52282616098A830019A654 /* AppDelegate.m */; };
+		0A52282A16098A830019A654 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52282916098A830019A654 /* ViewController.m */; };
+		0A52282D16098A830019A654 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A52282B16098A830019A654 /* ViewController.xib */; };
+		0A52283516098AC50019A654 /* GKImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52283416098AC50019A654 /* GKImagePicker.m */; };
+		0A52283716098AE20019A654 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A52283616098AE20019A654 /* MobileCoreServices.framework */; };
+		0A52283A16098B120019A654 /* GKImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52283916098B120019A654 /* GKImageCropper.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0A52281216098A830019A654 /* GKImagePicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GKImagePicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A52281616098A830019A654 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0A52281816098A830019A654 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0A52281A16098A830019A654 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0A52281E16098A830019A654 /* GKImagePicker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GKImagePicker-Info.plist"; path = "../Demo/GKImagePicker-Info.plist"; sourceTree = "<group>"; };
+		0A52282016098A830019A654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0A52282216098A830019A654 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../Demo/main.m; sourceTree = "<group>"; };
+		0A52282416098A830019A654 /* GKImagePicker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GKImagePicker-Prefix.pch"; path = "../Demo/GKImagePicker-Prefix.pch"; sourceTree = "<group>"; };
+		0A52282516098A830019A654 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Demo/AppDelegate.h; sourceTree = "<group>"; };
+		0A52282616098A830019A654 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../Demo/AppDelegate.m; sourceTree = "<group>"; };
+		0A52282816098A830019A654 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../Demo/ViewController.h; sourceTree = "<group>"; };
+		0A52282916098A830019A654 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../Demo/ViewController.m; sourceTree = "<group>"; };
+		0A52282C16098A830019A654 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		0A52283316098AC50019A654 /* GKImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKImagePicker.h; sourceTree = "<group>"; };
+		0A52283416098AC50019A654 /* GKImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKImagePicker.m; sourceTree = "<group>"; };
+		0A52283616098AE20019A654 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		0A52283816098B120019A654 /* GKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKImageCropper.h; sourceTree = "<group>"; };
+		0A52283916098B120019A654 /* GKImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKImageCropper.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0A52280F16098A830019A654 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A52283716098AE20019A654 /* MobileCoreServices.framework in Frameworks */,
+				0A52281716098A830019A654 /* UIKit.framework in Frameworks */,
+				0A52281916098A830019A654 /* Foundation.framework in Frameworks */,
+				0A52281B16098A830019A654 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A52280716098A830019A654 = {
+			isa = PBXGroup;
+			children = (
+				0A52281C16098A830019A654 /* GKImagePicker */,
+				0A52281516098A830019A654 /* Frameworks */,
+				0A52281316098A830019A654 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0A52281316098A830019A654 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A52281216098A830019A654 /* GKImagePicker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0A52281516098A830019A654 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A52283616098AE20019A654 /* MobileCoreServices.framework */,
+				0A52281616098A830019A654 /* UIKit.framework */,
+				0A52281816098A830019A654 /* Foundation.framework */,
+				0A52281A16098A830019A654 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0A52281C16098A830019A654 /* GKImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				0A522846160AD9D00019A654 /* GKImagePicker */,
+				0A52282516098A830019A654 /* AppDelegate.h */,
+				0A52282616098A830019A654 /* AppDelegate.m */,
+				0A52282816098A830019A654 /* ViewController.h */,
+				0A52282916098A830019A654 /* ViewController.m */,
+				0A52282B16098A830019A654 /* ViewController.xib */,
+				0A52281D16098A830019A654 /* Supporting Files */,
+			);
+			path = GKImagePicker;
+			sourceTree = "<group>";
+		};
+		0A52281D16098A830019A654 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0A52281E16098A830019A654 /* GKImagePicker-Info.plist */,
+				0A52281F16098A830019A654 /* InfoPlist.strings */,
+				0A52282216098A830019A654 /* main.m */,
+				0A52282416098A830019A654 /* GKImagePicker-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0A522846160AD9D00019A654 /* GKImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				0A52283316098AC50019A654 /* GKImagePicker.h */,
+				0A52283416098AC50019A654 /* GKImagePicker.m */,
+				0A52283816098B120019A654 /* GKImageCropper.h */,
+				0A52283916098B120019A654 /* GKImageCropper.m */,
+			);
+			name = GKImagePicker;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0A52281116098A830019A654 /* GKImagePicker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A52283016098A830019A654 /* Build configuration list for PBXNativeTarget "GKImagePicker" */;
+			buildPhases = (
+				0A52280E16098A830019A654 /* Sources */,
+				0A52280F16098A830019A654 /* Frameworks */,
+				0A52281016098A830019A654 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GKImagePicker;
+			productName = GKImagePicker;
+			productReference = 0A52281216098A830019A654 /* GKImagePicker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0A52280916098A830019A654 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Genki Kondo";
+			};
+			buildConfigurationList = 0A52280C16098A830019A654 /* Build configuration list for PBXProject "GKImagePicker" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0A52280716098A830019A654;
+			productRefGroup = 0A52281316098A830019A654 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0A52281116098A830019A654 /* GKImagePicker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0A52281016098A830019A654 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A52282116098A830019A654 /* InfoPlist.strings in Resources */,
+				0A52282D16098A830019A654 /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0A52280E16098A830019A654 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A52282316098A830019A654 /* main.m in Sources */,
+				0A52282716098A830019A654 /* AppDelegate.m in Sources */,
+				0A52282A16098A830019A654 /* ViewController.m in Sources */,
+				0A52283516098AC50019A654 /* GKImagePicker.m in Sources */,
+				0A52283A16098B120019A654 /* GKImageCropper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0A52281F16098A830019A654 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A52282016098A830019A654 /* en */,
+			);
+			name = InfoPlist.strings;
+			path = ../Demo;
+			sourceTree = "<group>";
+		};
+		0A52282B16098A830019A654 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A52282C16098A830019A654 /* en */,
+			);
+			name = ViewController.xib;
+			path = ../../../../Documents/workspace/GKImagePicker;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0A52282E16098A830019A654 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0A52282F16098A830019A654 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0A52283116098A830019A654 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Demo/GKImagePicker-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/GKImagePicker-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0A52283216098A830019A654 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Demo/GKImagePicker-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/GKImagePicker-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0A52280C16098A830019A654 /* Build configuration list for PBXProject "GKImagePicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A52282E16098A830019A654 /* Debug */,
+				0A52282F16098A830019A654 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A52283016098A830019A654 /* Build configuration list for PBXNativeTarget "GKImagePicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A52283116098A830019A654 /* Debug */,
+				0A52283216098A830019A654 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0A52280916098A830019A654 /* Project object */;
+}
