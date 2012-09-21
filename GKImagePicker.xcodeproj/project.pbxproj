@@ -209,7 +209,7 @@
 				0A52282C16098A830019A654 /* en */,
 			);
 			name = ViewController.xib;
-			path = ../../../../Documents/workspace/GKImagePicker;
+			path = ../Demo;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
