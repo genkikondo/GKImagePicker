@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "UIImage+Resize.h"
 
 @protocol GKImageCropperDelegate <NSObject>
 - (void)GKImageCropDidFinishEditingWithImage:(UIImage *)image;

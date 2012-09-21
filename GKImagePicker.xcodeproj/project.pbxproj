@@ -18,6 +18,9 @@
 		0A52283516098AC50019A654 /* GKImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52283416098AC50019A654 /* GKImagePicker.m */; };
 		0A52283716098AE20019A654 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A52283616098AE20019A654 /* MobileCoreServices.framework */; };
 		0A52283A16098B120019A654 /* GKImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52283916098B120019A654 /* GKImageCropper.m */; };
+		0A89D8A7160D0B1E00207627 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A89D8A2160D0B1E00207627 /* UIImage+Alpha.m */; };
+		0A89D8A8160D0B1E00207627 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A89D8A4160D0B1E00207627 /* UIImage+Resize.m */; };
+		0A89D8A9160D0B1E00207627 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A89D8A6160D0B1E00207627 /* UIImage+RoundedCorner.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,12 @@
 		0A52283616098AE20019A654 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		0A52283816098B120019A654 /* GKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKImageCropper.h; sourceTree = "<group>"; };
 		0A52283916098B120019A654 /* GKImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKImageCropper.m; sourceTree = "<group>"; };
+		0A89D8A1160D0B1E00207627 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "UIImage+/UIImage+Alpha.h"; sourceTree = "<group>"; };
+		0A89D8A2160D0B1E00207627 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "UIImage+/UIImage+Alpha.m"; sourceTree = "<group>"; };
+		0A89D8A3160D0B1E00207627 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "UIImage+/UIImage+Resize.h"; sourceTree = "<group>"; };
+		0A89D8A4160D0B1E00207627 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "UIImage+/UIImage+Resize.m"; sourceTree = "<group>"; };
+		0A89D8A5160D0B1E00207627 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "UIImage+/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		0A89D8A6160D0B1E00207627 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "UIImage+/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +125,22 @@
 				0A52283416098AC50019A654 /* GKImagePicker.m */,
 				0A52283816098B120019A654 /* GKImageCropper.h */,
 				0A52283916098B120019A654 /* GKImageCropper.m */,
+				0A89D8AA160D0C3600207627 /* UIImage+ */,
 			);
 			name = GKImagePicker;
+			sourceTree = "<group>";
+		};
+		0A89D8AA160D0C3600207627 /* UIImage+ */ = {
+			isa = PBXGroup;
+			children = (
+				0A89D8A1160D0B1E00207627 /* UIImage+Alpha.h */,
+				0A89D8A2160D0B1E00207627 /* UIImage+Alpha.m */,
+				0A89D8A3160D0B1E00207627 /* UIImage+Resize.h */,
+				0A89D8A4160D0B1E00207627 /* UIImage+Resize.m */,
+				0A89D8A5160D0B1E00207627 /* UIImage+RoundedCorner.h */,
+				0A89D8A6160D0B1E00207627 /* UIImage+RoundedCorner.m */,
+			);
+			name = "UIImage+";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +211,9 @@
 				0A52282A16098A830019A654 /* ViewController.m in Sources */,
 				0A52283516098AC50019A654 /* GKImagePicker.m in Sources */,
 				0A52283A16098B120019A654 /* GKImageCropper.m in Sources */,
+				0A89D8A7160D0B1E00207627 /* UIImage+Alpha.m in Sources */,
+				0A89D8A8160D0B1E00207627 /* UIImage+Resize.m in Sources */,
+				0A89D8A9160D0B1E00207627 /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

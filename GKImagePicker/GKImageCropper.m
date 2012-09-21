@@ -79,8 +79,7 @@
     float scaleY = frameHeight / imageHeight;
     float scaleScroll =  (scaleX < scaleY ? scaleY : scaleX);
     if (imageWidth < frameWidth || imageHeight < frameHeight) {
-        UIImage *scaledImage = [UIImage imageWithCGImage:[image CGImage] scale:1./scaleScroll orientation:UIImageOrientationUp];
-        image = scaledImage;
+        image = [image resizedImage:CGSizeMake(image.size.width*scaleScroll,image.size.height*scaleScroll) interpolationQuality:kCGInterpolationDefault];
     }
     
     // **********************************************
@@ -106,8 +105,6 @@
     // * Create scroll view
     // **********************************************
     imageView = [[UIImageView alloc] initWithImage:image];
-    NSLog(@"Image w: %.2f",image.size.width);
-    NSLog(@"Image h: %.2f",image.size.height);
     [scrollView addSubview:imageView];
     
     [UIColor colorWithRed:0/255. green:140/255. blue:190/255. alpha:1];
@@ -161,7 +158,6 @@
 UIImage* imageFromView(UIImage* srcImage, CGRect* rect) {
     CGImageRef cr = CGImageCreateWithImageInRect(srcImage.CGImage, *rect);
     UIImage* cropped = [UIImage imageWithCGImage:cr];
-    
     CGImageRelease(cr);
     return cropped;
 }
