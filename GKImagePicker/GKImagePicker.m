@@ -62,7 +62,7 @@
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     actionSheet.alpha=0.90;
     actionSheet.tag = 1;
-    [actionSheet showInView:((UIViewController *)self.delegate).view];
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)presentImageCropperWithImage:(UIImage *)image {
