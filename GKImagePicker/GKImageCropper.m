@@ -34,6 +34,7 @@
 @implementation GKImageCropper
 
 @synthesize delegate = _delegate;
+@synthesize willRescaleImage = _willRescaleImage;
 
 - (id)initWithImage:(UIImage*)theImage withSize:(CGSize)theSize {
     self= [super init];
@@ -51,6 +52,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.willRescaleImage = YES;
     }
     return self;
 }
@@ -176,8 +178,20 @@ UIImage* imageFromView(UIImage* srcImage, CGRect* rect) {
     cropRect.size.width = size.width * scale;
     cropRect.size.height = size.height * scale;
     
+    // **********************************************
+    // * Crop image
+    // **********************************************
+    image = imageFromView(image, &cropRect);
+    
+    // **********************************************
+    // * Resize image if willRescaleImage == YES
+    // **********************************************
+    if (self.willRescaleImage) {
+        image = [image resizedImage:CGSizeMake(size.width*2.,size.height*2.) interpolationQuality:kCGInterpolationDefault];
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
-    [self.delegate GKImageCropDidFinishEditingWithImage:imageFromView(image, &cropRect)];
+    [self.delegate GKImageCropDidFinishEditingWithImage:image];
 }
 
 #pragma mark - UIScrollView delegate methods

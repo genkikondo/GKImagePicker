@@ -39,6 +39,7 @@
 }
 
 @property (nonatomic, assign) id<GKImageCropperDelegate> delegate;
+@property (nonatomic) BOOL willRescaleImage;
 
 -(id)initWithImage:(UIImage*)theImage withSize:(CGSize)theSize;
 
