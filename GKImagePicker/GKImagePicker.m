@@ -29,12 +29,14 @@
 
 @synthesize delegate = _delegate;
 @synthesize viewController = _viewController;
+@synthesize willRescaleImage = _willRescaleImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.willRescaleImage = YES;
     }
     return self;
 }
@@ -68,6 +70,7 @@
 - (void)presentImageCropperWithImage:(UIImage *)image {
     GKImageCropper *imageCropper = [[GKImageCropper alloc] initWithImage:image withSize:cropSize];
     imageCropper.delegate = self;
+    imageCropper.willRescaleImage = self.willRescaleImage;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imageCropper];
     [(UIViewController *)self.delegate presentModalViewController:navigationController animated:YES];
 }

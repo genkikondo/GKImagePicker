@@ -40,9 +40,9 @@
 
 @property (nonatomic, assign) id<GKImagePickerDelegate> delegate;
 @property (nonatomic, retain) UIViewController *viewController;
+@property (nonatomic) BOOL willRescaleImage;
 
 - (void)presentPickerWithCropSize:(CGSize)size;
 - (void)presentImageCropperWithImage:(UIImage *)image;
 
 @end
-
