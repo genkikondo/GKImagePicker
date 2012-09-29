@@ -75,8 +75,8 @@
     double frameHeight = self.view.frame.size.height-navBarHeight;
     CGFloat imageWidth = CGImageGetWidth(image.CGImage);
     CGFloat imageHeight = CGImageGetHeight(image.CGImage);
-    float scaleX = frameWidth / imageWidth;
-    float scaleY = frameHeight / imageHeight;
+    float scaleX = size.width / imageWidth;
+    float scaleY = size.height / imageHeight;
     float scaleScroll =  (scaleX < scaleY ? scaleY : scaleX);
     if (imageWidth < frameWidth || imageHeight < frameHeight) {
         image = [image resizedImage:CGSizeMake(image.size.width*scaleScroll,image.size.height*scaleScroll) interpolationQuality:kCGInterpolationDefault];
@@ -96,8 +96,8 @@
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.showsVerticalScrollIndicator = NO;
     //Limit zoom
-    //scrollView.maximumZoomScale = scaleScroll*3;
-    //scrollView.minimumZoomScale = scaleScroll;
+    scrollView.maximumZoomScale = scaleScroll*10.;
+    scrollView.minimumZoomScale = scaleScroll;
 
     [self.view addSubview:scrollView];
     
