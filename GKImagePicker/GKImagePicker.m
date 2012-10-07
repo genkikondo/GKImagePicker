@@ -58,7 +58,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)presentPickerWithCropSize:(CGSize)size {
+- (void)presentPickerWithCropSize:(CGSize)size dismissAnimated:(BOOL)animated {
+    cropperDismissAnimated = animated;
     cropSize = size;
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:(id)self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Image from Camera", @"Image from Gallery", nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
@@ -67,7 +68,7 @@
     [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
-- (void)presentImageCropperWithImage:(UIImage *)image {
+- (void)presentImageCropperWithImage:(UIImage *)image dismissAnimated:(BOOL)animated {
     if (image.imageOrientation == UIImageOrientationRight) {
         image = [UIImage imageWithCGImage:[image CGImage]
                                     scale:1.0
@@ -135,7 +136,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
     [picker dismissModalViewControllerAnimated:NO];
-    [self presentImageCropperWithImage:image];
+    [self presentImageCropperWithImage:image dismissAnimated:cropperDismissAnimated];
 }
 
 -(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info
@@ -145,7 +146,7 @@
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:@"public.image"]){
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        [self presentImageCropperWithImage:image];
+        [self presentImageCropperWithImage:image dismissAnimated:cropperDismissAnimated];
     }
 }
 

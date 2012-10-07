@@ -36,11 +36,12 @@
 @synthesize delegate = _delegate;
 @synthesize willRescaleImage = _willRescaleImage;
 
-- (id)initWithImage:(UIImage*)theImage withSize:(CGSize)theSize {
+- (id)initWithImage:(UIImage*)theImage withSize:(CGSize)theSize dismissAnimated:(BOOL)animated {
     self= [super init];
     if(self) {
         image = theImage;
         size = theSize;
+        cropperDismissAnimated = animated;
     }
     return self;
 }
@@ -196,7 +197,7 @@ UIImage* imageFromView(UIImage* srcImage, CGRect* rect) {
         image = [image resizedImage:CGSizeMake(size.width*2.,size.height*2.) interpolationQuality:kCGInterpolationDefault];
     }
     
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:cropperDismissAnimated];
     [self.delegate GKImageCropDidFinishEditingWithImage:image];
 }
 

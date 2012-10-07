@@ -37,11 +37,12 @@
     UIImageView *imageView;
     id<GKImageCropperDelegate> delegate;
     CGSize size;
+    BOOL cropperDismissAnimated;
 }
 
 @property (nonatomic, assign) id<GKImageCropperDelegate> delegate;
 @property (nonatomic) BOOL willRescaleImage;
 
--(id)initWithImage:(UIImage*)theImage withSize:(CGSize)theSize;
+-(id)initWithImage:(UIImage*)theImage withSize:(CGSize)theSize dismissAnimated:(BOOL)animated;
 
 @end

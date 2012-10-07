@@ -36,13 +36,14 @@
     UIViewController *viewController;
     id <GKImagePickerDelegate> delegate;
     CGSize cropSize;
+    BOOL cropperDismissAnimated;
 }
 
 @property (nonatomic, assign) id<GKImagePickerDelegate> delegate;
 @property (nonatomic, retain) UIViewController *viewController;
 @property (nonatomic) BOOL willRescaleImage;
 
-- (void)presentPickerWithCropSize:(CGSize)size;
-- (void)presentImageCropperWithImage:(UIImage *)image;
+- (void)presentPickerWithCropSize:(CGSize)size dismissAnimated:(BOOL)animated;
+- (void)presentImageCropperWithImage:(UIImage *)image dismissAnimated:(BOOL)animated;
 
 @end
