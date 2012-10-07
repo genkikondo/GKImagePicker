@@ -21,6 +21,7 @@
 		0A89D8A7160D0B1E00207627 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A89D8A2160D0B1E00207627 /* UIImage+Alpha.m */; };
 		0A89D8A8160D0B1E00207627 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A89D8A4160D0B1E00207627 /* UIImage+Resize.m */; };
 		0A89D8A9160D0B1E00207627 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A89D8A6160D0B1E00207627 /* UIImage+RoundedCorner.m */; };
+		0AB90C2C162119A900A3CE03 /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB90C2B162119A800A3CE03 /* UIImage+Rotate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,8 @@
 		0A89D8A4160D0B1E00207627 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "UIImage+/UIImage+Resize.m"; sourceTree = "<group>"; };
 		0A89D8A5160D0B1E00207627 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "UIImage+/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		0A89D8A6160D0B1E00207627 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "UIImage+/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		0AB90C2A162119A800A3CE03 /* UIImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Rotate.h"; path = "UIImage+/UIImage+Rotate.h"; sourceTree = "<group>"; };
+		0AB90C2B162119A800A3CE03 /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Rotate.m"; path = "UIImage+/UIImage+Rotate.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 				0A89D8A2160D0B1E00207627 /* UIImage+Alpha.m */,
 				0A89D8A3160D0B1E00207627 /* UIImage+Resize.h */,
 				0A89D8A4160D0B1E00207627 /* UIImage+Resize.m */,
+				0AB90C2A162119A800A3CE03 /* UIImage+Rotate.h */,
+				0AB90C2B162119A800A3CE03 /* UIImage+Rotate.m */,
 				0A89D8A5160D0B1E00207627 /* UIImage+RoundedCorner.h */,
 				0A89D8A6160D0B1E00207627 /* UIImage+RoundedCorner.m */,
 			);
@@ -214,6 +219,7 @@
 				0A89D8A7160D0B1E00207627 /* UIImage+Alpha.m in Sources */,
 				0A89D8A8160D0B1E00207627 /* UIImage+Resize.m in Sources */,
 				0A89D8A9160D0B1E00207627 /* UIImage+RoundedCorner.m in Sources */,
+				0AB90C2C162119A900A3CE03 /* UIImage+Rotate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +255,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -264,6 +271,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -276,6 +284,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -285,6 +294,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

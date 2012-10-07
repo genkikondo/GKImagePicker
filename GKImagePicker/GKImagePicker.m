@@ -68,6 +68,23 @@
 }
 
 - (void)presentImageCropperWithImage:(UIImage *)image {
+    if (image.imageOrientation == UIImageOrientationRight) {
+        image = [UIImage imageWithCGImage:[image CGImage]
+                                    scale:1.0
+                              orientation: UIImageOrientationUp];
+        image = [image imageRotatedByDegrees:90.0];
+    } else if (image.imageOrientation == UIImageOrientationLeft) {
+        image = [UIImage imageWithCGImage:[image CGImage]
+                                    scale:1.0
+                              orientation: UIImageOrientationUp];
+        image = [image imageRotatedByDegrees:-90.0];
+    } else if (image.imageOrientation == UIImageOrientationDown) {
+        image = [UIImage imageWithCGImage:[image CGImage]
+                                    scale:1.0
+                              orientation: UIImageOrientationUp];
+        image = [image imageRotatedByDegrees:180.0];
+    }
+
     GKImageCropper *imageCropper = [[GKImageCropper alloc] initWithImage:image withSize:cropSize];
     imageCropper.delegate = self;
     imageCropper.willRescaleImage = self.willRescaleImage;

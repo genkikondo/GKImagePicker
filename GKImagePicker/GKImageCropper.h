@@ -25,6 +25,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIImage+Resize.h"
+#import "UIImage+Rotate.h"
 
 @protocol GKImageCropperDelegate <NSObject>
 - (void)GKImageCropDidFinishEditingWithImage:(UIImage *)image;

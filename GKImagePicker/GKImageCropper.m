@@ -100,7 +100,7 @@
     //Limit zoom
     scrollView.maximumZoomScale = scaleScroll*10.;
     scrollView.minimumZoomScale = scaleScroll;
-
+    
     [self.view addSubview:scrollView];
     
     // **********************************************
@@ -142,6 +142,12 @@
     // * Set scroll view inset so that corners of images can be accessed
     // **********************************************
     scrollView.contentInset = UIEdgeInsetsMake(overlayTop.frame.size.height, overlayLeft.frame.size.width, overlayBottom.frame.size.height, overlayRight.frame.size.width);
+    
+    // **********************************************
+    // * Add gesture recognizer for single tap to display image rotation menu
+    // **********************************************
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    [scrollView addGestureRecognizer:singleTap];
 }
 
 - (void)viewDidUnload
@@ -194,10 +200,49 @@ UIImage* imageFromView(UIImage* srcImage, CGRect* rect) {
     [self.delegate GKImageCropDidFinishEditingWithImage:image];
 }
 
+- (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {
+    // **********************************************
+    // * Single tap shows rotation menu
+    // **********************************************
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:(id)self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Rotate Clockwise", @"Rotate Counterclockwise", nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    actionSheet.alpha=0.90;
+    actionSheet.tag = 1;
+    [actionSheet showInView:self.view];
+}
+
+#pragma mark - Action sheet methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == 1) {
+        if (buttonIndex == 0) {
+            // Rotate clockwise
+            [self rotateImageByDegrees:90.0];
+        } else if (buttonIndex == 1) {
+            // Rotate counterclockwise
+            [self rotateImageByDegrees:-90.0];
+        }
+    }
+}
+
 #pragma mark - UIScrollView delegate methods
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return imageView;
+}
+
+- (void)rotateImageByDegrees:(CGFloat)degrees {
+    image = [image imageRotatedByDegrees:degrees];
+    imageView = [[UIImageView alloc] initWithImage:image];
+    [scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [scrollView addSubview:imageView];
+    CGFloat imageWidth = CGImageGetWidth(image.CGImage);
+    CGFloat imageHeight = CGImageGetHeight(image.CGImage);
+    float scaleX = size.width / imageWidth;
+    float scaleY = size.height / imageHeight;
+    float scaleScroll =  (scaleX < scaleY ? scaleY : scaleX);
+    scrollView.maximumZoomScale = scaleScroll*10.;
+    scrollView.minimumZoomScale = scaleScroll;
 }
 
 @end
