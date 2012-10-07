@@ -101,7 +101,6 @@
     //Limit zoom
     scrollView.maximumZoomScale = scaleScroll*10.;
     scrollView.minimumZoomScale = scaleScroll;
-    
     [self.view addSubview:scrollView];
     
     // **********************************************
@@ -149,6 +148,11 @@
     // **********************************************
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [scrollView addGestureRecognizer:singleTap];
+    
+    // **********************************************
+    // * Set initial zoom of scroll view
+    // **********************************************
+    [scrollView setZoomScale:scaleScroll animated:NO];
 }
 
 - (void)viewDidUnload
@@ -231,6 +235,8 @@ UIImage* imageFromView(UIImage* srcImage, CGRect* rect) {
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return imageView;
 }
+
+#pragma mark - Image rotation
 
 - (void)rotateImageByDegrees:(CGFloat)degrees {
     image = [image imageRotatedByDegrees:degrees];

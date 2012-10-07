@@ -86,7 +86,7 @@
         image = [image imageRotatedByDegrees:180.0];
     }
 
-    GKImageCropper *imageCropper = [[GKImageCropper alloc] initWithImage:image withSize:cropSize];
+    GKImageCropper *imageCropper = [[GKImageCropper alloc] initWithImage:image withSize:cropSize dismissAnimated:animated];
     imageCropper.delegate = self;
     imageCropper.willRescaleImage = self.willRescaleImage;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imageCropper];

@@ -55,7 +55,7 @@
 - (IBAction)handleImageButton:(id)sender {
     self.imagePicker = [[GKImagePicker alloc] init];
     self.imagePicker.delegate = self;
-    [self.imagePicker presentPickerWithCropSize:CGSizeMake(320.,88.)];
+    [self.imagePicker presentPickerWithCropSize:CGSizeMake(320.,88.) dismissAnimated:YES];
 }
 
 #pragma mark - GKImagePicker delegate methods
