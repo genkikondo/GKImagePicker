@@ -75,8 +75,7 @@
     // * Show GKImageCropper
     // **********************************************
     self.cropper.image = image;
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.cropper];
-    [(UIViewController *)self.delegate presentModalViewController:navigationController animated:YES];
+    [(UIViewController *)self.delegate presentModalViewController:[[UINavigationController alloc] initWithRootViewController:self.cropper] animated:YES];
 }
 
 #pragma mark - Image picker methods
