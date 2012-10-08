@@ -24,14 +24,19 @@
 //  THE SOFTWARE.
 
 #import "ViewController.h"
+#import "GKImagePicker.h"
 
-@interface ViewController ()
-
+@interface ViewController () <GKImagePickerDelegate> {
+    IBOutlet UIImageView *myImageView;
+    GKImagePicker *picker;
+}
+@property (nonatomic, retain) GKImagePicker *picker;
+- (IBAction)handleImageButton:(id)sender;
 @end
 
 @implementation ViewController
 
-@synthesize imagePicker = _imagePicker;
+@synthesize picker = _picker;
 
 - (void)viewDidLoad
 {
@@ -53,19 +58,20 @@
 #pragma mark - User interaction methods
 
 - (IBAction)handleImageButton:(id)sender {
-    self.imagePicker = [[GKImagePicker alloc] init];
-    self.imagePicker.delegate = self;
-    [self.imagePicker presentPickerWithCropSize:CGSizeMake(320.,88.) dismissAnimated:YES];
+    self.picker = [[GKImagePicker alloc] init];
+    self.picker.delegate = self;
+    self.picker.cropper.cropSize = CGSizeMake(88.,88.);
+    self.picker.cropper.rescaleImage = YES;
+    self.picker.cropper.rescaleFactor = 2.0;
+    self.picker.cropper.dismissAnimated = YES;
+    [self.picker presentPicker];
 }
 
 #pragma mark - GKImagePicker delegate methods
 
-- (void)GKImagePickerDidFinishWithImage:(UIImage *)image {
+-(void)imagePickerDidFinish:(GKImagePicker *)imagePicker withImage:(UIImage *)image {
+    myImageView.contentMode = UIViewContentModeCenter;
     myImageView.image = image;
-}
-
-- (void)GKImagePickerFailedWithError:(NSError *)error {
-    
 }
 
 @end

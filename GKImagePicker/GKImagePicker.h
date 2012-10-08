@@ -24,26 +24,22 @@
 //  THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import <MobileCoreServices/MobileCoreServices.h>
 #import "GKImageCropper.h"
 
-@protocol GKImagePickerDelegate <NSObject>
--(void)GKImagePickerFailedWithError:(NSError *)error;
--(void)GKImagePickerDidFinishWithImage:(UIImage *)image;
-@end
+@protocol GKImagePickerDelegate;
 
-@interface GKImagePicker : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, GKImageCropperDelegate> {
-    UIViewController *viewController;
-    id <GKImagePickerDelegate> delegate;
-    CGSize cropSize;
-    BOOL cropperDismissAnimated;
+@interface GKImagePicker : UIViewController {
+    id<GKImagePickerDelegate> delegate;
+    GKImageCropper *cropper;
 }
 
 @property (nonatomic, assign) id<GKImagePickerDelegate> delegate;
-@property (nonatomic, retain) UIViewController *viewController;
-@property (nonatomic) BOOL willRescaleImage;
+@property (nonatomic, retain) GKImageCropper *cropper;
 
-- (void)presentPickerWithCropSize:(CGSize)size dismissAnimated:(BOOL)animated;
-- (void)presentImageCropperWithImage:(UIImage *)image dismissAnimated:(BOOL)animated;
+- (void)presentPicker;
 
+@end
+
+@protocol GKImagePickerDelegate <NSObject>
+-(void)imagePickerDidFinish:(GKImagePicker *)imagePicker withImage:(UIImage *)image;
 @end

@@ -25,42 +25,44 @@
 
 #import "GKImagePicker.h"
 
-@implementation GKImagePicker
+@interface GKImagePicker () <GKImageCropperDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+- (void)presentImageCropperWithImage:(UIImage *)image;
+@end
+
+@implementation GKImagePicker 
 
 @synthesize delegate = _delegate;
-@synthesize viewController = _viewController;
-@synthesize willRescaleImage = _willRescaleImage;
+@synthesize cropper = _cropper;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+#pragma mark - View lifecycle
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        self.willRescaleImage = YES;
+        self.cropper = [[GKImageCropper alloc] init];
+        self.cropper.delegate = self;
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)presentPickerWithCropSize:(CGSize)size dismissAnimated:(BOOL)animated {
-    cropperDismissAnimated = animated;
-    cropSize = size;
+#pragma mark - View control
+
+- (void)presentPicker {
+    // **********************************************
+    // * Show action sheet that will allow image selection from camera or gallery
+    // **********************************************
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:(id)self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Image from Camera", @"Image from Gallery", nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     actionSheet.alpha=0.90;
@@ -68,28 +70,12 @@
     [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
-- (void)presentImageCropperWithImage:(UIImage *)image dismissAnimated:(BOOL)animated {
-    if (image.imageOrientation == UIImageOrientationRight) {
-        image = [UIImage imageWithCGImage:[image CGImage]
-                                    scale:1.0
-                              orientation: UIImageOrientationUp];
-        image = [image imageRotatedByDegrees:90.0];
-    } else if (image.imageOrientation == UIImageOrientationLeft) {
-        image = [UIImage imageWithCGImage:[image CGImage]
-                                    scale:1.0
-                              orientation: UIImageOrientationUp];
-        image = [image imageRotatedByDegrees:-90.0];
-    } else if (image.imageOrientation == UIImageOrientationDown) {
-        image = [UIImage imageWithCGImage:[image CGImage]
-                                    scale:1.0
-                              orientation: UIImageOrientationUp];
-        image = [image imageRotatedByDegrees:180.0];
-    }
-
-    GKImageCropper *imageCropper = [[GKImageCropper alloc] initWithImage:image withSize:cropSize dismissAnimated:animated];
-    imageCropper.delegate = self;
-    imageCropper.willRescaleImage = self.willRescaleImage;
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imageCropper];
+- (void)presentImageCropperWithImage:(UIImage *)image {    
+    // **********************************************
+    // * Show GKImageCropper
+    // **********************************************
+    self.cropper.image = image;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.cropper];
     [(UIViewController *)self.delegate presentModalViewController:navigationController animated:YES];
 }
 
@@ -119,7 +105,7 @@
 #elif TARGET_OS_IPHONE
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    picker.delegate = (id)self;
+    picker.delegate = self;
     picker.allowsEditing = NO;
     [(UIViewController *)self.delegate presentModalViewController:picker animated:YES];
 #endif
@@ -128,32 +114,30 @@
 - (void)showGalleryImagePicker {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    picker.delegate = (id)self;
+    picker.delegate = self;
     picker.allowsEditing = NO;
     [(UIViewController *)self.delegate presentModalViewController:picker animated:YES];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
-{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
     [picker dismissModalViewControllerAnimated:NO];
-    [self presentImageCropperWithImage:image dismissAnimated:cropperDismissAnimated];
+    [self presentImageCropperWithImage:image];
 }
 
--(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info
-{
+-(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info {
     [picker dismissModalViewControllerAnimated:NO];
     // Extract image from the picker
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:@"public.image"]){
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        [self presentImageCropperWithImage:image dismissAnimated:cropperDismissAnimated];
+        [self presentImageCropperWithImage:image];
     }
 }
 
 #pragma mark - GKImageCropper delegate methods
 
-- (void)GKImageCropDidFinishEditingWithImage:(UIImage *)image {
-    [self.delegate GKImagePickerDidFinishWithImage:image];
+- (void)imageCropperDidFinish:(GKImageCropper *)imageCropper withImage:(UIImage *)image {
+    [self.delegate imagePickerDidFinish:self withImage:image];
 }
 
 @end

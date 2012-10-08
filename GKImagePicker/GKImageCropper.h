@@ -24,25 +24,29 @@
 //  THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "UIImage+Resize.h"
-#import "UIImage+Rotate.h"
 
-@protocol GKImageCropperDelegate <NSObject>
-- (void)GKImageCropDidFinishEditingWithImage:(UIImage *)image;
-@end
+@protocol GKImageCropperDelegate;
 
-@interface GKImageCropper : UIViewController <UIScrollViewDelegate> {
-    UIScrollView *scrollView;
+@interface GKImageCropper : UIViewController {
     UIImage *image;
-    UIImageView *imageView;
     id<GKImageCropperDelegate> delegate;
-    CGSize size;
-    BOOL cropperDismissAnimated;
+    CGSize cropSize;
+    BOOL rescaleImage;
+    double rescaleFactor;
+    BOOL dismissAnimated;
 }
 
 @property (nonatomic, assign) id<GKImageCropperDelegate> delegate;
-@property (nonatomic) BOOL willRescaleImage;
+@property (nonatomic, retain) UIImage *image;
+@property (nonatomic) CGSize cropSize;
+@property (nonatomic) BOOL rescaleImage;
+@property (nonatomic) double rescaleFactor;
+@property (nonatomic) BOOL dismissAnimated;
 
--(id)initWithImage:(UIImage*)theImage withSize:(CGSize)theSize dismissAnimated:(BOOL)animated;
+-(id)initWithImage:(UIImage*)theImage withCropSize:(CGSize)theSize willRescaleImage:(BOOL)willRescaleImage withRescaleFactor:(double)theFactor willDismissAnimated:(BOOL)willDismissAnimated;
 
+@end
+
+@protocol GKImageCropperDelegate <NSObject>
+- (void)imageCropperDidFinish:(GKImageCropper *)imageCropper withImage:(UIImage *)image;
 @end

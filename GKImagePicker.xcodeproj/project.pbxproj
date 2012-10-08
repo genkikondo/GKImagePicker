@@ -16,7 +16,6 @@
 		0A52282A16098A830019A654 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52282916098A830019A654 /* ViewController.m */; };
 		0A52282D16098A830019A654 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A52282B16098A830019A654 /* ViewController.xib */; };
 		0A52283516098AC50019A654 /* GKImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52283416098AC50019A654 /* GKImagePicker.m */; };
-		0A52283716098AE20019A654 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A52283616098AE20019A654 /* MobileCoreServices.framework */; };
 		0A52283A16098B120019A654 /* GKImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52283916098B120019A654 /* GKImageCropper.m */; };
 		0A89D8A7160D0B1E00207627 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A89D8A2160D0B1E00207627 /* UIImage+Alpha.m */; };
 		0A89D8A8160D0B1E00207627 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A89D8A4160D0B1E00207627 /* UIImage+Resize.m */; };
@@ -40,7 +39,6 @@
 		0A52282C16098A830019A654 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		0A52283316098AC50019A654 /* GKImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKImagePicker.h; sourceTree = "<group>"; };
 		0A52283416098AC50019A654 /* GKImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKImagePicker.m; sourceTree = "<group>"; };
-		0A52283616098AE20019A654 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		0A52283816098B120019A654 /* GKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKImageCropper.h; sourceTree = "<group>"; };
 		0A52283916098B120019A654 /* GKImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKImageCropper.m; sourceTree = "<group>"; };
 		0A89D8A1160D0B1E00207627 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "UIImage+/UIImage+Alpha.h"; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A52283716098AE20019A654 /* MobileCoreServices.framework in Frameworks */,
 				0A52281716098A830019A654 /* UIKit.framework in Frameworks */,
 				0A52281916098A830019A654 /* Foundation.framework in Frameworks */,
 				0A52281B16098A830019A654 /* CoreGraphics.framework in Frameworks */,
@@ -88,7 +85,6 @@
 		0A52281516098A830019A654 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0A52283616098AE20019A654 /* MobileCoreServices.framework */,
 				0A52281616098A830019A654 /* UIKit.framework */,
 				0A52281816098A830019A654 /* Foundation.framework */,
 				0A52281A16098A830019A654 /* CoreGraphics.framework */,

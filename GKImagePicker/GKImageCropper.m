@@ -24,44 +24,76 @@
 //  THE SOFTWARE.
 
 #import "GKImageCropper.h"
+#import "UIImage+Resize.h"
+#import "UIImage+Rotate.h"
 
 #define OVERLAY_COLOR [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7]
 
-@interface GKImageCropper ()
-
+@interface GKImageCropper () <UIScrollViewDelegate> {
+    UIScrollView *scrollView;
+    UIImageView *imageView;
+}
 @end
 
 @implementation GKImageCropper
 
 @synthesize delegate = _delegate;
-@synthesize willRescaleImage = _willRescaleImage;
+@synthesize image = _image;
+@synthesize cropSize = _cropSize;
+@synthesize rescaleImage = _rescaleImage;
+@synthesize rescaleFactor = _rescaleFactor;
+@synthesize dismissAnimated = _dismissAnimated;
 
-- (id)initWithImage:(UIImage*)theImage withSize:(CGSize)theSize dismissAnimated:(BOOL)animated {
-    self= [super init];
+-(id)initWithImage:(UIImage*)theImage withCropSize:(CGSize)theSize willRescaleImage:(BOOL)willRescaleImage withRescaleFactor:(double)theFactor willDismissAnimated:(BOOL)willDismissAnimated {
+    self = [super init];
     if(self) {
-        image = theImage;
-        size = theSize;
-        cropperDismissAnimated = animated;
+        self.image = theImage;
+        // **********************************************
+        // * Rotate image to proper orientation
+        // **********************************************
+        if (self.image.imageOrientation == UIImageOrientationRight) {
+            self.image = [UIImage imageWithCGImage:[self.image CGImage]
+                                        scale:1.0
+                                  orientation: UIImageOrientationUp];
+            self.image = [self.image imageRotatedByDegrees:90.0];
+        } else if (self.image.imageOrientation == UIImageOrientationLeft) {
+            self.image = [UIImage imageWithCGImage:[self.image CGImage]
+                                        scale:1.0
+                                  orientation: UIImageOrientationUp];
+            self.image = [self.image imageRotatedByDegrees:-90.0];
+        } else if (self.image.imageOrientation == UIImageOrientationDown) {
+            self.image = [UIImage imageWithCGImage:[self.image CGImage]
+                                        scale:1.0
+                                  orientation: UIImageOrientationUp];
+            self.image = [self.image imageRotatedByDegrees:180.0];
+        }
+        self.cropSize = theSize;
+        self.rescaleImage = willRescaleImage;
+        self.rescaleFactor = theFactor;
+        self.dismissAnimated = willDismissAnimated;
     }
     return self;
 }
 
 #pragma mark - View lifecycle
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        self.willRescaleImage = YES;
+        // **********************************************
+        // * Set default parameters
+        // **********************************************
+        self.cropSize = CGSizeMake(320.0,320.0);
+        self.rescaleImage = YES;
+        self.rescaleFactor = 1.0;
+        self.dismissAnimated = YES;
+        self.image = [[UIImage alloc] init];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
     // **********************************************
     // * Configure navigation item
@@ -76,13 +108,13 @@
     double navBarHeight = self.navigationController.navigationBar.frame.size.height;
     double frameWidth = self.view.frame.size.width;
     double frameHeight = self.view.frame.size.height-navBarHeight;
-    CGFloat imageWidth = CGImageGetWidth(image.CGImage);
-    CGFloat imageHeight = CGImageGetHeight(image.CGImage);
-    float scaleX = size.width / imageWidth;
-    float scaleY = size.height / imageHeight;
+    CGFloat imageWidth = CGImageGetWidth(self.image.CGImage);
+    CGFloat imageHeight = CGImageGetHeight(self.image.CGImage);
+    float scaleX = self.cropSize.width / imageWidth;
+    float scaleY = self.cropSize.height / imageHeight;
     float scaleScroll =  (scaleX < scaleY ? scaleY : scaleX);
     if (imageWidth < frameWidth || imageHeight < frameHeight) {
-        image = [image resizedImage:CGSizeMake(image.size.width*scaleScroll,image.size.height*scaleScroll) interpolationQuality:kCGInterpolationDefault];
+        self.image = [self.image resizedImage:CGSizeMake(self.image.size.width*scaleScroll,self.image.size.height*scaleScroll) interpolationQuality:kCGInterpolationDefault];
     }
     
     // **********************************************
@@ -93,7 +125,7 @@
     scrollView.frame = CGRectMake(0, 0, frameWidth, frameHeight);
     scrollView.delegate = self;
     scrollView.scrollEnabled = YES;
-    scrollView.contentSize = image.size;
+    scrollView.contentSize = self.image.size;
     scrollView.pagingEnabled = NO;
     scrollView.directionalLockEnabled = NO;
     scrollView.showsHorizontalScrollIndicator = NO;
@@ -106,35 +138,35 @@
     // **********************************************
     // * Create scroll view
     // **********************************************
-    imageView = [[UIImageView alloc] initWithImage:image];
+    imageView = [[UIImageView alloc] initWithImage:self.image];
     [scrollView addSubview:imageView];
     
     [UIColor colorWithRed:0/255. green:140/255. blue:190/255. alpha:1];
     // **********************************************
     // * Create top shaded overlay
     // **********************************************
-    UIImageView *overlayTop = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., frameWidth, frameHeight/2.-size.height/2.)];
+    UIImageView *overlayTop = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., frameWidth, frameHeight/2.-self.cropSize.height/2.)];
     overlayTop.backgroundColor = OVERLAY_COLOR;
     [self.view addSubview:overlayTop];
     
     // **********************************************
     // * Create bottom shaded overlay
     // **********************************************
-    UIImageView *overlayBottom = [[UIImageView alloc] initWithFrame:CGRectMake(0., frameHeight/2.+size.height/2., frameWidth, frameHeight/2.-size.height/2.)];
+    UIImageView *overlayBottom = [[UIImageView alloc] initWithFrame:CGRectMake(0., frameHeight/2.+self.cropSize.height/2., frameWidth, frameHeight/2.-self.cropSize.height/2.)];
     overlayBottom.backgroundColor = OVERLAY_COLOR;
     [self.view addSubview:overlayBottom];
     
     // **********************************************
     // * Create left shaded overlay
     // **********************************************
-    UIImageView *overlayLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0., frameHeight/2.-size.height/2., frameWidth/2.-size.width/2., size.height)];
+    UIImageView *overlayLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0., frameHeight/2.-self.cropSize.height/2., frameWidth/2.-self.cropSize.width/2., self.cropSize.height)];
     overlayLeft.backgroundColor = OVERLAY_COLOR;
     [self.view addSubview:overlayLeft];
     
     // **********************************************
     // * Create right shaded overlay
     // **********************************************
-    UIImageView *overlayRight = [[UIImageView alloc] initWithFrame:CGRectMake(frameWidth/2.+size.width/2., frameHeight/2.-size.height/2., frameWidth/2.-size.width/2., size.height)];
+    UIImageView *overlayRight = [[UIImageView alloc] initWithFrame:CGRectMake(frameWidth/2.+self.cropSize.width/2., frameHeight/2.-self.cropSize.height/2., frameWidth/2.-self.cropSize.width/2., self.cropSize.height)];
     overlayRight.backgroundColor = OVERLAY_COLOR;
     [self.view addSubview:overlayRight];
     
@@ -155,14 +187,12 @@
     [scrollView setZoomScale:scaleScroll animated:NO];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -181,28 +211,29 @@ UIImage* imageFromView(UIImage* srcImage, CGRect* rect) {
     // **********************************************
     // * Define CGRect to crop
     // **********************************************
-    double cropAreaVerticalOffset = self.view.frame.size.height/2.-size.height/2.;
+    double cropAreaHorizontalOffset = self.view.frame.size.width/2.-self.cropSize.width/2.;
+    double cropAreaVerticalOffset = self.view.frame.size.height/2.-self.cropSize.height/2.;
     CGRect cropRect;
     float scale = 1.0f/scrollView.zoomScale;
-    cropRect.origin.x = scrollView.contentOffset.x * scale;
+    cropRect.origin.x = (scrollView.contentOffset.x+cropAreaHorizontalOffset) * scale;
     cropRect.origin.y = (scrollView.contentOffset.y+cropAreaVerticalOffset) * scale;
-    cropRect.size.width = size.width * scale;
-    cropRect.size.height = size.height * scale;
+    cropRect.size.width = self.cropSize.width * scale;
+    cropRect.size.height = self.cropSize.height * scale;
     
     // **********************************************
     // * Crop image
     // **********************************************
-    image = imageFromView(image, &cropRect);
+    self.image = imageFromView(self.image, &cropRect);
     
     // **********************************************
     // * Resize image if willRescaleImage == YES
     // **********************************************
-    if (self.willRescaleImage) {
-        image = [image resizedImage:CGSizeMake(size.width*2.,size.height*2.) interpolationQuality:kCGInterpolationDefault];
+    if (self.rescaleImage) {
+        self.image = [self.image resizedImage:CGSizeMake(self.cropSize.width*self.rescaleFactor,self.cropSize.height*self.rescaleFactor) interpolationQuality:kCGInterpolationDefault];
     }
     
-    [self dismissModalViewControllerAnimated:cropperDismissAnimated];
-    [self.delegate GKImageCropDidFinishEditingWithImage:image];
+    [self dismissModalViewControllerAnimated:self.dismissAnimated];
+    [self.delegate imageCropperDidFinish:self withImage:self.image];
 }
 
 - (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {
@@ -239,17 +270,20 @@ UIImage* imageFromView(UIImage* srcImage, CGRect* rect) {
 #pragma mark - Image rotation
 
 - (void)rotateImageByDegrees:(CGFloat)degrees {
-    image = [image imageRotatedByDegrees:degrees];
-    imageView = [[UIImageView alloc] initWithImage:image];
+    double tempZoomScale = scrollView.zoomScale;
+    self.image = [self.image imageRotatedByDegrees:degrees];
+    imageView = [[UIImageView alloc] initWithImage:self.image];
     [scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [scrollView addSubview:imageView];
-    CGFloat imageWidth = CGImageGetWidth(image.CGImage);
-    CGFloat imageHeight = CGImageGetHeight(image.CGImage);
-    float scaleX = size.width / imageWidth;
-    float scaleY = size.height / imageHeight;
+    CGFloat imageWidth = CGImageGetWidth(self.image.CGImage);
+    CGFloat imageHeight = CGImageGetHeight(self.image.CGImage);
+    float scaleX = self.cropSize.width / imageWidth;
+    float scaleY = self.cropSize.height / imageHeight;
     float scaleScroll =  (scaleX < scaleY ? scaleY : scaleX);
     scrollView.maximumZoomScale = scaleScroll*10.;
     scrollView.minimumZoomScale = scaleScroll;
+    scrollView.contentSize = self.image.size;
+    [scrollView setZoomScale:tempZoomScale animated:NO];
 }
 
 @end

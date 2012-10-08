@@ -24,15 +24,9 @@
 //  THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "GKImagePicker.h"
 
-@interface ViewController : UIViewController <GKImagePickerDelegate> {
-    GKImagePicker *imagePicker;
-    IBOutlet UIImageView *myImageView;
-}
+@class GKImagePicker;
 
-@property (nonatomic, retain) GKImagePicker *imagePicker;
-
-- (IBAction)handleImageButton:(id)sender;
+@interface ViewController : UIViewController
 
 @end
