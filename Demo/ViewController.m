@@ -69,7 +69,7 @@
 
 #pragma mark - GKImagePicker delegate methods
 
--(void)imagePickerDidFinish:(GKImagePicker *)imagePicker withImage:(UIImage *)image {
+- (void)imagePickerDidFinish:(GKImagePicker *)imagePicker withImage:(UIImage *)image {
     myImageView.contentMode = UIViewContentModeCenter;
     myImageView.image = image;
 }
