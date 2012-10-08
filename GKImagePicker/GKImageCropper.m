@@ -28,6 +28,7 @@
 #import "UIImage+Rotate.h"
 
 #define OVERLAY_COLOR [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7]
+#define INNER_BORDER_COLOR [UIColor colorWithRed:255./255. green:255./255. blue:255./255. alpha:0.7]
 
 @interface GKImageCropper () <UIScrollViewDelegate> {
     UIScrollView *scrollView;
@@ -94,6 +95,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
+    // **********************************************
+    // * Set background color
+    // **********************************************
+    self.view.backgroundColor = [UIColor blackColor];
     
     // **********************************************
     // * Configure navigation item
@@ -103,7 +109,7 @@
     [self.navigationItem setRightBarButtonItem:okButton animated:NO];
     
     // **********************************************
-    // * Determine image scaling if necessary
+    // * Determine scroll zoom level
     // **********************************************
     double navBarHeight = self.navigationController.navigationBar.frame.size.height;
     double frameWidth = self.view.frame.size.width;
@@ -113,9 +119,6 @@
     float scaleX = self.cropSize.width / imageWidth;
     float scaleY = self.cropSize.height / imageHeight;
     float scaleScroll =  (scaleX < scaleY ? scaleY : scaleX);
-    if (imageWidth < frameWidth || imageHeight < frameHeight) {
-        self.image = [self.image resizedImage:CGSizeMake(self.image.size.width*scaleScroll,self.image.size.height*scaleScroll) interpolationQuality:kCGInterpolationDefault];
-    }
     
     // **********************************************
     // * Create scroll view
@@ -171,6 +174,16 @@
     [self.view addSubview:overlayRight];
     
     // **********************************************
+    // * Create inner border overlay
+    // **********************************************
+    UIImageView *overlayInnerBorder = [[UIImageView alloc] initWithFrame:CGRectMake(frameWidth/2.-self.cropSize.width/2., frameHeight/2.-self.cropSize.height/2., self.cropSize.width, self.cropSize.height)];
+    overlayInnerBorder.backgroundColor = [UIColor clearColor];
+    overlayInnerBorder.layer.masksToBounds = YES;
+    overlayInnerBorder.layer.borderColor = INNER_BORDER_COLOR.CGColor;
+    overlayInnerBorder.layer.borderWidth = 1;
+    [self.view addSubview:overlayInnerBorder];
+    
+    // **********************************************
     // * Set scroll view inset so that corners of images can be accessed
     // **********************************************
     scrollView.contentInset = UIEdgeInsetsMake(overlayTop.frame.size.height, overlayLeft.frame.size.width, overlayBottom.frame.size.height, overlayRight.frame.size.width);
@@ -219,7 +232,7 @@ UIImage* imageFromView(UIImage* srcImage, CGRect* rect) {
     cropRect.origin.y = (scrollView.contentOffset.y+cropAreaVerticalOffset) * scale;
     cropRect.size.width = self.cropSize.width * scale;
     cropRect.size.height = self.cropSize.height * scale;
-    
+
     // **********************************************
     // * Crop image
     // **********************************************

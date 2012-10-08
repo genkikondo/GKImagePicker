@@ -5,6 +5,7 @@ An enhancement of UIImagePicker in iOS to enable image cropping at any specified
 
 ## Features
 
++ Grab a new image from your camera or an existing image from your gallery
 + Zoom and crop in any way you wish
 + Rotate image (tap the screen to show menu)
 + Takes into account UIImageOrientation so the images will show up the way they were intended
@@ -20,11 +21,23 @@ Copy all the files in GKImagePicker (including subfolders) into your project. Be
 
     GKImagePicker *picker = [[GKImagePicker alloc] init];
     picker.delegate = self;
-    picker.cropper.cropSize = CGSizeMake(88.,88.);
+    picker.cropper.cropSize = CGSizeMake(160.0, 80.0);
     picker.cropper.rescaleImage = YES;
     picker.cropper.rescaleFactor = 2.0;
     picker.cropper.dismissAnimated = YES;
     [picker presentPicker];
+
+Or, if you already have the image you want to crop, you can skip the picker and go straight to the cropper:
+
+    GKImageCropper *cropper = [[GKImageCropper alloc] init];
+    cropper.delegate = self;
+    cropper.image = yourImage;
+    cropper.cropSize = CGSizeMake(160.0, 80.0);
+    cropper.rescaleImage = YES;
+    cropper.rescaleFactor = 2.0;
+    cropper.dismissAnimated = YES;
+    cropper.image = yourImage;
+    [self presentModalViewController:[[UINavigationController alloc] initWithRootViewController:cropper] animated:YES];
 
 ### The Long Version
 

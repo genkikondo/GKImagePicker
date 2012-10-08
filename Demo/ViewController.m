@@ -58,13 +58,13 @@
 #pragma mark - User interaction methods
 
 - (IBAction)handleImageButton:(id)sender {
-    self.picker = [[GKImagePicker alloc] init];
-    self.picker.delegate = self;
-    self.picker.cropper.cropSize = CGSizeMake(88.,88.);
-    self.picker.cropper.rescaleImage = YES;
-    self.picker.cropper.rescaleFactor = 2.0;
-    self.picker.cropper.dismissAnimated = YES;
-    [self.picker presentPicker];
+     self.picker = [[GKImagePicker alloc] init];
+     self.picker.delegate = self;
+     self.picker.cropper.cropSize = CGSizeMake(160.,80.);
+     self.picker.cropper.rescaleImage = YES;
+     self.picker.cropper.rescaleFactor = 2.0;
+     self.picker.cropper.dismissAnimated = NO;
+     [self.picker presentPicker];
 }
 
 #pragma mark - GKImagePicker delegate methods
