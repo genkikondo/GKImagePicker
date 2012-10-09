@@ -35,6 +35,8 @@
     BOOL rescaleImage;
     double rescaleFactor;
     BOOL dismissAnimated;
+    UIColor *overlayColor;
+    UIColor *innerBorderColor;
 }
 
 @property (nonatomic, assign) id<GKImageCropperDelegate> delegate;
@@ -43,6 +45,8 @@
 @property (nonatomic) BOOL rescaleImage;
 @property (nonatomic) double rescaleFactor;
 @property (nonatomic) BOOL dismissAnimated;
+@property (nonatomic, retain) UIColor *overlayColor;
+@property (nonatomic, retain) UIColor *innerBorderColor;
 
 -(id)initWithImage:(UIImage*)theImage withCropSize:(CGSize)theSize willRescaleImage:(BOOL)willRescaleImage withRescaleFactor:(double)theFactor willDismissAnimated:(BOOL)willDismissAnimated;
 

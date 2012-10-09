@@ -27,9 +27,6 @@
 #import "UIImage+Resize.h"
 #import "UIImage+Rotate.h"
 
-#define OVERLAY_COLOR [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7]
-#define INNER_BORDER_COLOR [UIColor colorWithRed:255./255. green:255./255. blue:255./255. alpha:0.7]
-
 @interface GKImageCropper () <UIScrollViewDelegate> {
     UIScrollView *scrollView;
     UIImageView *imageView;
@@ -44,6 +41,8 @@
 @synthesize rescaleImage = _rescaleImage;
 @synthesize rescaleFactor = _rescaleFactor;
 @synthesize dismissAnimated = _dismissAnimated;
+@synthesize overlayColor = _overlayColor;
+@synthesize innerBorderColor = _innerBorderColor;
 
 -(id)initWithImage:(UIImage*)theImage withCropSize:(CGSize)theSize willRescaleImage:(BOOL)willRescaleImage withRescaleFactor:(double)theFactor willDismissAnimated:(BOOL)willDismissAnimated {
     self = [super init];
@@ -84,11 +83,13 @@
         // **********************************************
         // * Set default parameters
         // **********************************************
+        self.image = [[UIImage alloc] init];
         self.cropSize = CGSizeMake(320.0,320.0);
         self.rescaleImage = YES;
         self.rescaleFactor = 1.0;
         self.dismissAnimated = YES;
-        self.image = [[UIImage alloc] init];
+        self.overlayColor = [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7];
+        self.innerBorderColor = [UIColor colorWithRed:255./255. green:255./255. blue:255./255. alpha:0.7];
     }
     return self;
 }
@@ -149,28 +150,28 @@
     // * Create top shaded overlay
     // **********************************************
     UIImageView *overlayTop = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., frameWidth, frameHeight/2.-self.cropSize.height/2.)];
-    overlayTop.backgroundColor = OVERLAY_COLOR;
+    overlayTop.backgroundColor = self.overlayColor;
     [self.view addSubview:overlayTop];
     
     // **********************************************
     // * Create bottom shaded overlay
     // **********************************************
     UIImageView *overlayBottom = [[UIImageView alloc] initWithFrame:CGRectMake(0., frameHeight/2.+self.cropSize.height/2., frameWidth, frameHeight/2.-self.cropSize.height/2.)];
-    overlayBottom.backgroundColor = OVERLAY_COLOR;
+    overlayBottom.backgroundColor = self.overlayColor;
     [self.view addSubview:overlayBottom];
     
     // **********************************************
     // * Create left shaded overlay
     // **********************************************
     UIImageView *overlayLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0., frameHeight/2.-self.cropSize.height/2., frameWidth/2.-self.cropSize.width/2., self.cropSize.height)];
-    overlayLeft.backgroundColor = OVERLAY_COLOR;
+    overlayLeft.backgroundColor = self.overlayColor;
     [self.view addSubview:overlayLeft];
     
     // **********************************************
     // * Create right shaded overlay
     // **********************************************
     UIImageView *overlayRight = [[UIImageView alloc] initWithFrame:CGRectMake(frameWidth/2.+self.cropSize.width/2., frameHeight/2.-self.cropSize.height/2., frameWidth/2.-self.cropSize.width/2., self.cropSize.height)];
-    overlayRight.backgroundColor = OVERLAY_COLOR;
+    overlayRight.backgroundColor = self.overlayColor;
     [self.view addSubview:overlayRight];
     
     // **********************************************
@@ -179,7 +180,7 @@
     UIImageView *overlayInnerBorder = [[UIImageView alloc] initWithFrame:CGRectMake(frameWidth/2.-self.cropSize.width/2., frameHeight/2.-self.cropSize.height/2., self.cropSize.width, self.cropSize.height)];
     overlayInnerBorder.backgroundColor = [UIColor clearColor];
     overlayInnerBorder.layer.masksToBounds = YES;
-    overlayInnerBorder.layer.borderColor = INNER_BORDER_COLOR.CGColor;
+    overlayInnerBorder.layer.borderColor = self.innerBorderColor.CGColor;
     overlayInnerBorder.layer.borderWidth = 1;
     [self.view addSubview:overlayInnerBorder];
     

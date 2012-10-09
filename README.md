@@ -20,22 +20,25 @@ Copy all the files in GKImagePicker (including subfolders) into your project. Be
 ### The Short Version
 
     GKImagePicker *picker = [[GKImagePicker alloc] init];
-    picker.delegate = self;
-    picker.cropper.cropSize = CGSizeMake(160.0, 80.0);
-    picker.cropper.rescaleImage = YES;
-    picker.cropper.rescaleFactor = 2.0;
-    picker.cropper.dismissAnimated = YES;
-    [picker presentPicker];
+    self.picker.delegate = self;
+    // (Optional) default: CGSizeMake(320., 320.)
+    self.picker.cropper.cropSize = CGSizeMake(160., 80.);   
+    // (Optional) default: YES
+    self.picker.cropper.rescaleImage = YES;
+    // (Optional) default: 1.0
+    self.picker.cropper.rescaleFactor = 2.0;
+    // (Optional) default: YES
+    self.picker.cropper.dismissAnimated = NO;
+    // (Optional) default: [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7]
+    self.picker.cropper.overlayColor = [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7];
+    // (Optional) default: [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7]
+    self.picker.cropper.innerBorderColor = [UIColor colorWithRed:255./255. green:255./255. blue:255./255. alpha:0.7];
+    [self.picker presentPicker];
 
 Or, if you already have the image you want to crop, you can skip the picker and go straight to the cropper:
 
     GKImageCropper *cropper = [[GKImageCropper alloc] init];
     cropper.delegate = self;
-    cropper.image = yourImage;
-    cropper.cropSize = CGSizeMake(160.0, 80.0);
-    cropper.rescaleImage = YES;
-    cropper.rescaleFactor = 2.0;
-    cropper.dismissAnimated = YES;
     cropper.image = yourImage;
     [self presentModalViewController:[[UINavigationController alloc] initWithRootViewController:cropper] animated:YES];
 
