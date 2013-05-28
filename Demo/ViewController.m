@@ -60,10 +60,10 @@
 - (IBAction)handleImageButton:(id)sender {
     self.picker = [[GKImagePicker alloc] init];
     self.picker.delegate = self;
-    self.picker.cropper.cropSize = CGSizeMake(160.,80.);   // (Optional) Default: CGSizeMake(320., 320.)
+    self.picker.cropper.cropSize = CGSizeMake(320.,170.);   // (Optional) Default: CGSizeMake(320., 320.)
     self.picker.cropper.rescaleImage = YES;                // (Optional) Default: YES
     self.picker.cropper.rescaleFactor = 2.0;               // (Optional) Default: 1.0
-    self.picker.cropper.dismissAnimated = NO;              // (Optional) Default: YES
+    self.picker.cropper.dismissAnimated = YES;              // (Optional) Default: YES
     self.picker.cropper.overlayColor = [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7];  // (Optional) Default: [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7]
     self.picker.cropper.innerBorderColor = [UIColor colorWithRed:255./255. green:255./255. blue:255./255. alpha:0.7];   // (Optional) Default: [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7]
     [self.picker presentPicker];

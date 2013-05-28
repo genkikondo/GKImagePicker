@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A18039A1754450A003E06C9 /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1803991754450A003E06C9 /* UIImage+FixOrientation.m */; };
 		0A52281716098A830019A654 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A52281616098A830019A654 /* UIKit.framework */; };
 		0A52281916098A830019A654 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A52281816098A830019A654 /* Foundation.framework */; };
 		0A52281B16098A830019A654 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A52281A16098A830019A654 /* CoreGraphics.framework */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A1803981754450A003E06C9 /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+FixOrientation.h"; path = "UIImage+/UIImage+FixOrientation.h"; sourceTree = "<group>"; };
+		0A1803991754450A003E06C9 /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+FixOrientation.m"; path = "UIImage+/UIImage+FixOrientation.m"; sourceTree = "<group>"; };
 		0A52281216098A830019A654 /* GKImagePicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GKImagePicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A52281616098A830019A654 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0A52281816098A830019A654 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -141,6 +144,8 @@
 				0AB90C2B162119A800A3CE03 /* UIImage+Rotate.m */,
 				0A89D8A5160D0B1E00207627 /* UIImage+RoundedCorner.h */,
 				0A89D8A6160D0B1E00207627 /* UIImage+RoundedCorner.m */,
+				0A1803981754450A003E06C9 /* UIImage+FixOrientation.h */,
+				0A1803991754450A003E06C9 /* UIImage+FixOrientation.m */,
 			);
 			name = "UIImage+";
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 				0A89D8A8160D0B1E00207627 /* UIImage+Resize.m in Sources */,
 				0A89D8A9160D0B1E00207627 /* UIImage+RoundedCorner.m in Sources */,
 				0AB90C2C162119A900A3CE03 /* UIImage+Rotate.m in Sources */,
+				0A18039A1754450A003E06C9 /* UIImage+FixOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,7 @@
 #import "GKImageCropper.h"
 #import "UIImage+Resize.h"
 #import "UIImage+Rotate.h"
+#import "UIImage+FixOrientation.h"
 
 @interface GKImageCropper () <UIScrollViewDelegate> {
     UIScrollView *scrollView;
@@ -213,7 +214,8 @@
 #pragma mark - Helper methods
 
 UIImage* imageFromView(UIImage* srcImage, CGRect* rect) {
-    CGImageRef cr = CGImageCreateWithImageInRect(srcImage.CGImage, *rect);
+    UIImage *fixOrientation = [srcImage fixOrientation];
+    CGImageRef cr = CGImageCreateWithImageInRect(fixOrientation.CGImage, *rect);
     UIImage* cropped = [UIImage imageWithCGImage:cr];
     CGImageRelease(cr);
     return cropped;
