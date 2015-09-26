@@ -66,7 +66,7 @@
     self.picker.cropper.dismissAnimated = YES;              // (Optional) Default: YES
     self.picker.cropper.overlayColor = [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7];  // (Optional) Default: [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7]
     self.picker.cropper.innerBorderColor = [UIColor colorWithRed:255./255. green:255./255. blue:255./255. alpha:0.7];   // (Optional) Default: [UIColor colorWithRed:0/255. green:0/255. blue:0/255. alpha:0.7]
-    [self.picker presentPicker];
+    [self.picker presentPickerWithAnchor:self.view from:self];
 }
 
 #pragma mark - GKImagePicker delegate methods

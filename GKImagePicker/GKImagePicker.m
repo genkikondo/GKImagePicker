@@ -26,6 +26,9 @@
 #import "GKImagePicker.h"
 
 @interface GKImagePicker () <GKImageCropperDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+{
+    UIViewController *presentingViewController;
+}
 - (void)presentImageCropperWithImage:(UIImage *)image;
 @end
 
@@ -59,43 +62,42 @@
 
 #pragma mark - View control
 
-- (void)presentPicker {
+- (void)presentPickerWithAnchor:(UIView*)anchor from:(UIViewController*)viewController{
+    // save presenting view controller for later show image cropper view, and photo view
+    self->presentingViewController = viewController;
+    
     // **********************************************
     // * Show action sheet that will allow image selection from camera or gallery
     // **********************************************
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:(id)self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Image from Camera", @"Image from Gallery", nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-    actionSheet.alpha=0.90;
-    actionSheet.tag = 1;
-    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    alert.popoverPresentationController.sourceView = anchor;
+    alert.popoverPresentationController.sourceRect = CGRectMake(anchor.bounds.size.width / 2.0f, anchor.bounds.size.height / 2.0f, 1.0f, 1.0f);
+    alert.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Image from Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showCameraImagePicker];
+    }];
+    UIAlertAction *gallery = [UIAlertAction actionWithTitle:@"Image from Gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showGalleryImagePicker];
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        // do nothing
+    }];
+    
+    [alert addAction:camera];
+    [alert addAction:gallery];
+    [alert addAction:cancel];
+    [viewController presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)presentImageCropperWithImage:(UIImage *)image {    
+- (void)presentImageCropperWithImage:(UIImage *)image {
     // **********************************************
     // * Show GKImageCropper
     // **********************************************
     self.cropper.image = image;
-    [(UIViewController *)self.delegate presentModalViewController:[[UINavigationController alloc] initWithRootViewController:self.cropper] animated:YES];
+    [self->presentingViewController presentViewController:[[UINavigationController alloc] initWithRootViewController:self.cropper] animated:YES completion:nil];
 }
 
 #pragma mark - Image picker methods
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (actionSheet.tag) {
-        case 1:
-            switch (buttonIndex) {
-                case 0:
-                    [self showCameraImagePicker];
-                    break;
-                case 1:
-                    [self showGalleryImagePicker];
-                    break;
-            }
-            break;
-        default:
-            break;
-    }
-}
 
 - (void)showCameraImagePicker {
 #if TARGET_IPHONE_SIMULATOR
@@ -106,7 +108,7 @@
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     picker.delegate = self;
     picker.allowsEditing = NO;
-    [(UIViewController *)self.delegate presentModalViewController:picker animated:YES];
+    [self->presentingViewController presentViewController:picker animated:YES completion:nil];
 #endif
 }
 
@@ -115,16 +117,16 @@
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     picker.delegate = self;
     picker.allowsEditing = NO;
-    [(UIViewController *)self.delegate presentModalViewController:picker animated:YES];
+    [self->presentingViewController presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
-    [picker dismissModalViewControllerAnimated:NO];
+    [picker dismissViewControllerAnimated:YES completion:nil];
     [self presentImageCropperWithImage:image];
 }
 
 -(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info {
-    [picker dismissModalViewControllerAnimated:NO];
+    [picker dismissViewControllerAnimated:YES completion:nil];
     // Extract image from the picker
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:@"public.image"]){
