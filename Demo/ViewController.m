@@ -58,9 +58,13 @@
 #pragma mark - User interaction methods
 
 - (IBAction)handleImageButton:(id)sender {
+    CGRect screens = [[UIScreen mainScreen] bounds];
+    float width = screens.size.width;
+    float height = width * 0.53125;
+    
     self.picker = [[GKImagePicker alloc] init];
     self.picker.delegate = self;
-    self.picker.cropper.cropSize = CGSizeMake(320.,170.);   // (Optional) Default: CGSizeMake(320., 320.)
+    self.picker.cropper.cropSize = CGSizeMake(width, height);   // (Optional) Default: CGSizeMake(320., 320.)
     self.picker.cropper.rescaleImage = YES;                // (Optional) Default: YES
     self.picker.cropper.rescaleFactor = 2.0;               // (Optional) Default: 1.0
     self.picker.cropper.dismissAnimated = YES;              // (Optional) Default: YES
@@ -72,7 +76,6 @@
 #pragma mark - GKImagePicker delegate methods
 
 - (void)imagePickerDidFinish:(GKImagePicker *)imagePicker withImage:(UIImage *)image {
-    myImageView.contentMode = UIViewContentModeCenter;
     myImageView.image = image;
 }
 
