@@ -36,6 +36,7 @@
 @property (nonatomic, assign) id<GKImagePickerDelegate> delegate;
 @property (nonatomic, retain) GKImageCropper *cropper;
 
+- (void)presentPickerFrom:(UIViewController*)viewController NS_DEPRECATED_IOS(2_0, 8_0);
 - (void)presentPickerWithAnchor:(UIView*)anchor from:(UIViewController*)viewController;
 
 @end

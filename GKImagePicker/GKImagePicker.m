@@ -62,6 +62,20 @@
 
 #pragma mark - View control
 
+- (void)presentPickerFrom:(UIViewController*)viewController{
+    // save presenting view controller for later show image cropper view, and photo view
+    self->presentingViewController = viewController;
+    
+    // **********************************************
+    // * Show action sheet that will allow image selection from camera or gallery
+    // **********************************************
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:(id)self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Image from Camera", @"Image from Gallery", nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    actionSheet.alpha=0.90;
+    actionSheet.tag = 1;
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+}
+
 - (void)presentPickerWithAnchor:(UIView*)anchor from:(UIViewController*)viewController{
     // save presenting view controller for later show image cropper view, and photo view
     self->presentingViewController = viewController;
@@ -98,6 +112,23 @@
 }
 
 #pragma mark - Image picker methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (actionSheet.tag) {
+        case 1:
+            switch (buttonIndex) {
+                case 0:
+                    [self showCameraImagePicker];
+                    break;
+                case 1:
+                    [self showGalleryImagePicker];
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+}
 
 - (void)showCameraImagePicker {
 #if TARGET_IPHONE_SIMULATOR

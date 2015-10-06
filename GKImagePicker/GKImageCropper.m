@@ -256,24 +256,51 @@ UIImage* imageFromView(UIImage* srcImage, CGRect* rect) {
     // **********************************************
     // * Single tap shows rotation menu
     // **********************************************
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    alert.popoverPresentationController.sourceView = self.view;
-    alert.popoverPresentationController.sourceRect = CGRectMake(self.view.bounds.size.width / 2.0f, self.view.bounds.size.height / 2.0f, 1.0f, 1.0f);
-    alert.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
-    UIAlertAction *rotateClockwise = [UIAlertAction actionWithTitle:@"Rotate Clockwise" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self rotateImageByDegrees:90.0];
-    }];
-    UIAlertAction *rotateCounterClockwise = [UIAlertAction actionWithTitle:@"Rotate Counterclockwise" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self rotateImageByDegrees:-90.0];
-    }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        // do nothing
-    }];
-    
-    [alert addAction:rotateClockwise];
-    [alert addAction:rotateCounterClockwise];
-    [alert addAction:cancel];
-    [self presentViewController:alert animated:YES completion:nil];
+    // for iOS 8.0+
+    if(NSClassFromString(@"UIAlertController") != nil)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        alert.popoverPresentationController.sourceView = self.view;
+        alert.popoverPresentationController.sourceRect = CGRectMake(self.view.bounds.size.width / 2.0f, self.view.bounds.size.height / 2.0f, 1.0f, 1.0f);
+        alert.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+        UIAlertAction *rotateClockwise = [UIAlertAction actionWithTitle:@"Rotate Clockwise" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self rotateImageByDegrees:90.0];
+        }];
+        UIAlertAction *rotateCounterClockwise = [UIAlertAction actionWithTitle:@"Rotate Counterclockwise" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self rotateImageByDegrees:-90.0];
+        }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            // do nothing
+        }];
+        
+        [alert addAction:rotateClockwise];
+        [alert addAction:rotateCounterClockwise];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    // otherwise, the app is run on iOS < 8.0
+    else
+    {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:(id)self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Rotate Clockwise", @"Rotate Counterclockwise", nil];
+        actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+        actionSheet.alpha=0.90;
+        actionSheet.tag = 1;
+        [actionSheet showInView:self.view];
+    }
+}
+
+#pragma mark - Action sheet methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == 1) {
+        if (buttonIndex == 0) {
+            // Rotate clockwise
+            [self rotateImageByDegrees:90.0];
+        } else if (buttonIndex == 1) {
+            // Rotate counterclockwise
+            [self rotateImageByDegrees:-90.0];
+        }
+    }
 }
 
 #pragma mark - UIScrollView delegate methods
