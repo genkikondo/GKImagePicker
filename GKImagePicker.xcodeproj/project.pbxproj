@@ -22,6 +22,7 @@
 		0A89D8A8160D0B1E00207627 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A89D8A4160D0B1E00207627 /* UIImage+Resize.m */; };
 		0A89D8A9160D0B1E00207627 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A89D8A6160D0B1E00207627 /* UIImage+RoundedCorner.m */; };
 		0AB90C2C162119A900A3CE03 /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB90C2B162119A800A3CE03 /* UIImage+Rotate.m */; };
+		1E2B09D71BC43F5B00C74353 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E2B09D61BC43F5B00C74353 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		0A89D8A6160D0B1E00207627 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "UIImage+/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		0AB90C2A162119A800A3CE03 /* UIImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Rotate.h"; path = "UIImage+/UIImage+Rotate.h"; sourceTree = "<group>"; };
 		0AB90C2B162119A800A3CE03 /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Rotate.m"; path = "UIImage+/UIImage+Rotate.m"; sourceTree = "<group>"; };
+		1E2B09D61BC43F5B00C74353 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = GKImagePicker/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 		0A52280716098A830019A654 = {
 			isa = PBXGroup;
 			children = (
+				1E2B09D61BC43F5B00C74353 /* Images.xcassets */,
 				0A52281C16098A830019A654 /* Demo */,
 				0A52281516098A830019A654 /* Frameworks */,
 				0A52281316098A830019A654 /* Products */,
@@ -201,6 +204,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E2B09D71BC43F5B00C74353 /* Images.xcassets in Resources */,
 				0A52282116098A830019A654 /* InfoPlist.strings in Resources */,
 				0A52282D16098A830019A654 /* ViewController.xib in Resources */,
 			);
@@ -306,10 +310,14 @@
 		0A52283116098A830019A654 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/GKImagePicker-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/GKImagePicker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -317,10 +325,14 @@
 		0A52283216098A830019A654 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/GKImagePicker-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/GKImagePicker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
